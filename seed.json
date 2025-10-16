@@ -1,0 +1,47 @@
+[
+  {
+    "id": "task_001",
+    "title": "Group Study Session",
+    "dueDate": "2025-10-20",
+    "duration": 120,
+    "tag": "Study",
+    "createdAt": "2025-10-16T09:00:00Z",
+    "updatedAt": "2025-10-16T09:00:00Z"
+  },
+  {
+    "id": "task_002",
+    "title": "Grocery Shopping for Dinner",
+    "dueDate": "2025-10-17",
+    "duration": 45,
+    "tag": "Personal",
+    "createdAt": "2025-10-15T14:30:00Z",
+    "updatedAt": "2025-10-15T14:30:00Z"
+  },
+  {
+    "id": "task_003",
+    "title": "Finalize Project Proposal Draft",
+    "dueDate": "2025-10-25",
+    "duration": 300,
+    "tag": "Work",
+    "createdAt": "2025-10-14T10:15:00Z",
+    "updatedAt": "2025-10-16T08:00:00Z"
+  },
+  {
+    "id": "task_004",
+    "title": "Call Maintenance for Leaking Faucet",
+    "dueDate": "2025-10-18",
+    "duration": 15,
+    "tag": "Home",
+    "createdAt": "2025-10-16T06:00:00Z",
+    "updatedAt": "2025-10-16T06:00:00Z"
+  },
+  {
+    "id": "task_005",
+    "title": "Review Chapter 5 for Exam",
+    "dueDate": "2025-10-22",
+    "duration": 90,
+    "tag": "Study",
+    "createdAt": "2025-10-13T20:45:00Z",
+    "updatedAt": "2025-10-13T20:45:00Z"
+  }
+]

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Life Planner</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+  <link rel="stylesheet" href="styles/themes.css" />
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="app-header">
+    <h1 class="logo">🎓 Campus Life Planner</h1>
+
+    <button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+
+    <nav id="navbar" class="navbar" aria-label="Main navigation">
+        <ul>
+            <li><a href="#about" class="nav-link active">About</a></li>
+            <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+            <li><a href="#records" class="nav-link">Tasks</a></li>
+            <li><a href="#add-edit" class="nav-link">Add/Edit Task</a></li>
+            <li><a href="#settings" class="nav-link">Settings</a></li>
+        </ul>
+
+        <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+    </nav>
+
+  </header>
+
+  <main id="main">
+    <section id="about" class="page-section active">
+      <h2>About</h2>
+      <p>Welcome to Campus Life Planner — your all-in-one task and event manager for campus life!</p>
+      <p>Contact: <a href="mailto:you@example.com">you@example.com</a> | <a href="https://github.com/yourgithub" target="_blank">GitHub</a></p>
+    </section>
+
+    <section id="dashboard" class="page-section">
+      <h2>Dashboard</h2>
+      <p>Quick stats and summaries will appear here.</p>
+    </section>
+
+    <section id="records" class="page-section">
+      <h2>Tasks & Events</h2>
+      <p>Manage your to-dos, events, and deadlines here.</p>
+    </section>
+
+    <section id="add-edit" class="page-section">
+      <h2>Add / Edit Task</h2>
+      <p>This will contain the task form later (title, duration, tag, date).</p>
+      <button class="btn-primary">+ Add New Task</button>
+    </section>
+
+    <section id="settings" class="page-section">
+      <h2>Settings</h2>
+      <p>Change display units, theme preferences, and other options.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Campus Life Planner</p>
+  </footer>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+/* =========================
+   components.css
+   ========================= */
+
+/* =========================
+   Navigation
+========================= */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: 0 2px 6px var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.navbar a:hover,
+.navbar a:focus,
+.nav-link.active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid var(--accent);
+}
+
+/* Mobile menu toggle */
+#menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* Theme toggle */
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  color: var(--text);
+}
+
+/* =========================
+   Buttons
+========================= */
+button, a {
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: #2563eb;
+}
+
+/* =========================
+   Page Sections
+========================= */
+.page-section {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: none;
+}
+
+.page-section.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   Responsive Navbar
+========================= */
+@media (max-width: 768px) {
+  #menu-toggle {
+    display: block;
+  }
+
+  .navbar {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--nav-bg);
+    width: 200px;
+    padding: 1rem;
+    border: 1px solid var(--nav-border);
+    box-shadow: 0 4px 8px var(--shadow);
+    transform: translateX(110%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  .navbar.open {
+    transform: translateX(0);
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* =========================
+   Task Table / Card Styling
+========================= */
+#tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#tasks-table th, #tasks-table td {
+  border: 1px solid var(--border);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+#tasks-table th {
+  background: var(--nav-bg);
+}
+
+.tasks-cards {
+  display: none;
+}
+
+.task-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: var(--card-bg);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.task-card h3 {
+  margin-top: 0;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.edit-btn, .delete-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* =========================
+   Responsive Task Cards
+========================= */
+@media (max-width: 768px) {
+  #tasks-table {
+    display: none;
+  }
+  .tasks-cards {
+    display: block;
+  }
+}
