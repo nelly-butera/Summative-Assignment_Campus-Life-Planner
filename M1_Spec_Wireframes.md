@@ -1,19 +1,17 @@
-# 🏫 Campus Life Planner  
+## Campus Life Planner  
 **Milestone 1 – Spec & Wireframes**  
-*(Building Responsive UI Summative Assignment)*  
 
----
 
-## 🎯 Purpose Statement
+### Purpose Statement
 
 The **Campus Life Planner** is a responsive, accessible web application that helps students manage and organize campus-related tasks and events.  
 It allows users to add, edit, and track their academic and extracurricular activities, monitor total durations, and view summaries or trends — all stored locally for persistence.  
 
 The app demonstrates responsive design, modular JavaScript, regex validation and search, accessibility best practices, and data persistence using `localStorage`.
 
----
 
-## 🧩 Data Model
+
+### Data Model
 
 Each record represents a campus task or event.
 
@@ -45,9 +43,9 @@ Each record represents a campus task or event.
 - Detect time tokens in text → `/\b\d{2}:\d{2}\b/`
 - Filter by tag prefix → `/^@tag:\w+/`
 
----
 
-## 📑 Pages & Navigation Structure
+
+## Pages & Navigation Structure
 
 | Page | Purpose | Key Elements |
 |------|----------|--------------|
@@ -57,9 +55,9 @@ Each record represents a campus task or event.
 | **4. Add/Edit Form** | Create or modify tasks | Input fields (title, dueDate, duration, tag) with live regex validation |
 | **5. Settings** | Manage preferences | Units (minutes ↔ hours), cap target, JSON import/export buttons |
 
----
 
-## ♿ Accessibility Plan (a11y)
+
+## Accessibility Plan (a11y)
 
 | Feature | Description |
 |----------|--------------|
@@ -71,9 +69,9 @@ Each record represents a campus task or event.
 | **ARIA Live Regions** | Announce form errors and dashboard updates |
 | **Color Contrast** | Meet WCAG AA standards for readability |
 
----
 
-## 📱 Responsive Design Plan
+
+## Responsive Design Plan
 
 | Breakpoint | Layout Description |
 |-------------|--------------------|
@@ -87,9 +85,9 @@ Each record represents a campus task or event.
 - Flexbox and media queries  
 - Consistent spacing, alignment, and typography  
 
----
 
-## ⚙️ Core Features Summary
+
+## Core Features Summary
 
 | Feature | Description |
 |----------|--------------|
@@ -103,11 +101,11 @@ Each record represents a campus task or event.
 | **Responsive UI** | 3 breakpoints, polished transitions |
 | **Settings Page** | Manage unit conversions and targets |
 
----
 
-## 🖼️ Wireframes
 
-### 1️⃣ About Page
+## Wireframes
+
+### 1️ About Page
 ```
 +----------------------------------------------------+
 | Campus Life Planner                                |
@@ -117,7 +115,7 @@ Each record represents a campus task or event.
 +----------------------------------------------------+
 ```
 
----
+
 
 ### 2️⃣ Dashboard / Stats
 ```
@@ -134,7 +132,7 @@ Tue ▇▇▇▇▇▇
 ...
 ```
 
----
+
 
 ### 3️⃣ Records (Main Page)
 ```
@@ -148,7 +146,6 @@ Tue ▇▇▇▇▇▇
 [+ Add New Task Button]
 ```
 
----
 
 ### 4️⃣ Add/Edit Form
 ```
@@ -175,9 +172,8 @@ Import JSON [Button]
 Export JSON [Button]
 ```
 
----
 
-## 🧮 Milestone 1 Deliverables Checklist
+## Milestone 1 Deliverables Checklist
 
 - [x] Purpose statement and chosen theme  
 - [x] Data model defined with field validation patterns  
@@ -187,8 +183,6 @@ Export JSON [Button]
 - [x] Core features summarized  
 - [x] Wireframes created (text-based layout sketches)  
 
----
 
 **Author:** Teta Butera Nelly  
 
----
