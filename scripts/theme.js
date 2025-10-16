@@ -1,4 +1,3 @@
-// scripts/theme.js
 export class ThemeManager {
     constructor() {
         this.html = document.documentElement;

@@ -8,11 +8,11 @@ import { populateTimeDropdowns, setupTimeDurationListeners } from './form.js';
 
 export class TaskPlannerApp {
     constructor() {
-        console.log("✅ TaskPlannerApp constructor called");
+        console.log("TaskPlannerApp constructor called");
 
         // Initialize core modules
         this.state = new StateManager();
-        this.storage = new StorageManager(); // ✅ fixed
+        this.storage = new StorageManager();
         this.ui = new UIManager(this.state);
         this.searchManager = new SearchManager(this.state, this.ui);
 
@@ -22,11 +22,9 @@ export class TaskPlannerApp {
         this.init();
     }
 
-    /** ============================
-     *  INITIALIZATION
-     *  ============================ */
+    // Initializing the task planner
     init() {
-        console.log("⚙️ Initializing TaskPlannerApp...");
+        console.log("Initializing TaskPlannerApp...");
 
         this.loadStoredTasks();
         this.bindFormEvents();
@@ -41,18 +39,14 @@ export class TaskPlannerApp {
         this.ui.showMessage("Planner ready!", "success");
     }
 
-    /** ============================
-     *  LOAD SAVED TASKS
-     *  ============================ */
+    // this section is for loading tasks
     loadStoredTasks() {
         const saved = this.storage.loadTasks();
         this.state.setTasks(saved);
         this.ui.renderTasks();
     }
 
-    /** ============================
-     *  FORM HANDLING
-     *  ============================ */
+    // this section is for form handling
     bindFormEvents() {
         const form = document.getElementById('task-form');
         if (!form) return;
@@ -92,12 +86,12 @@ export class TaskPlannerApp {
         }
 
         if (this.currentEditId) {
-            // ✅ Update existing task
+            // to Update existing task
             this.state.updateTask(this.currentEditId, task);
             this.ui.showMessage('Task updated successfully!', 'success');
             this.currentEditId = null;
         } else {
-            // ✅ Create new task
+            // to Create new task
             this.state.addTask(task);
             this.ui.showMessage('Task added successfully!', 'success');
         }
@@ -113,12 +107,10 @@ export class TaskPlannerApp {
         if (form) form.reset();
         clearInlineErrors();
         this.currentEditId = null;
-        this.ui.updateFormMode('add'); // optional, if you support changing form title/button text
+        this.ui.updateFormMode('add');
     }
 
-    /** ============================
-     *  TASK ACTIONS (EDIT/DELETE)
-     *  ============================ */
+    // this function is for delete and editing tasks
     bindTaskActions() {
         document.addEventListener('click', (e) => {
             const editBtn = e.target.closest('.edit-btn');
@@ -174,9 +166,7 @@ export class TaskPlannerApp {
         }
     }
 
-    /** ============================
-     *  THEME TOGGLING
-     *  ============================ */
+    // this is where the magic happens, theme toggling
     setupTheme() {
         const body = document.querySelector('html');
         const toggle = document.getElementById('theme-toggle');
@@ -199,9 +189,8 @@ export class TaskPlannerApp {
         });
     }
 
-    /** ============================
-     *  NAVIGATION
-     *  ============================ */
+
+    //  this where i make the html sections acts as pages
     setupNavigation() {
         const sections = document.querySelectorAll('.page-section');
         const navItems = document.querySelectorAll('.nav-item');
@@ -226,9 +215,7 @@ export class TaskPlannerApp {
         window.showPage('dashboard');
     }
 
-    /** ============================
-     *  SEARCH
-     *  ============================ */
+    // search bar function
     setupSearch() {
         const searchInput = document.getElementById('search-input');
         if (!searchInput) return;

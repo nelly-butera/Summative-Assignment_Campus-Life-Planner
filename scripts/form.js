@@ -1,4 +1,5 @@
-// scripts/form.js
+// I added this file because i wanted to make my planner more accurate by having hours tasks should start and end at present
+
 export function populateTimeDropdowns() {
     const hourSelects = [document.getElementById('startHour'), document.getElementById('endHour')];
     const minuteSelects = [document.getElementById('startMinute'), document.getElementById('endMinute')];
@@ -11,7 +12,7 @@ export function populateTimeDropdowns() {
     }
 
     // Populate minutes (00–59)
-    for (let m = 0; m < 60; m += 5) { // every 5 minutes looks cleaner
+    for (let m = 0; m < 60; m += 5) { 
         const option = document.createElement('option');
         option.value = option.textContent = m.toString().padStart(2, '0');
         minuteSelects.forEach(select => select?.appendChild(option.cloneNode(true)));
@@ -37,7 +38,7 @@ export function setupTimeDurationListeners() {
         }
 
         let duration = (endH * 60 + endM) - (startH * 60 + startM);
-        if (duration < 0) duration += 24 * 60; // handle overnight
+        if (duration < 0) duration += 24 * 60;
 
         durationInput.value = duration;
     }

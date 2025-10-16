@@ -1,13 +1,10 @@
-// scripts/ui.js
 export class UIManager {
     constructor(state) {
         this.state = state;
         this.taskListElement = document.getElementById('task-list');
     }
 
-    /** ============================
-     *  TASK RENDERING
-     *  ============================ */
+    // this section is for task rendering
     renderTasks() {
         if (!this.taskListElement) return;
         this.taskListElement.innerHTML = '';
@@ -53,9 +50,8 @@ export class UIManager {
         return div.innerHTML;
     }
 
-    /** ============================
-     *  MESSAGES
-     *  ============================ */
+
+    // any notifications and error handlers needed, i'm tackling that here
     showMessage(message, type = 'info') {
         const messageBox = document.getElementById('form-message');
         if (!messageBox) return;
@@ -69,9 +65,7 @@ export class UIManager {
         }, 3000);
     }
 
-    /** ============================
-     *  FORM MODE SWITCHING
-     *  ============================ */
+// form mode switching between edit and add task is here
     updateFormMode(mode) {
         const formTitle = document.getElementById('form-title');
         const submitBtn = document.getElementById('form-submit-btn');
@@ -88,9 +82,7 @@ export class UIManager {
         }
     }
 
-    /** ============================
-     *  MODAL (OPTIONAL)
-     *  ============================ */
+//  the popup on delete and edit
     showModal(message, onConfirm) {
         const modal = document.getElementById('custom-modal');
         const modalMessage = document.getElementById('modal-message');

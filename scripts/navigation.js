@@ -1,4 +1,3 @@
-// scripts/navigation.js
 export class NavigationManager {
     constructor() {
         this.sections = document.querySelectorAll('.page-section');

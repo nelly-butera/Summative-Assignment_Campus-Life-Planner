@@ -1,4 +1,3 @@
-// scripts/state.js
 class StateManager {
     constructor() {
         this.tasks = [];

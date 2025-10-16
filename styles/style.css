@@ -1,27 +1,29 @@
 /* --- CSS VARIABLES FOR THEME --- */
 :root {
-    /* Light Theme Defaults */
-    --color-primary: #4f46e5;
-    --color-secondary: #10b981;
-    --color-text: #1f2937; /* Gray 800 */
-    --color-bg: #f9fafb; /* Gray 50 */
+    /* Light Theme - Sunset */
+    --color-primary: #ff7043; /* vibrant orange */
+    --color-secondary: #ffab76; /* peachy coral */
+    --color-text: #2b2b2b;
+    --color-bg: #fff8f5; /* soft white with warmth */
     --color-card-bg: #ffffff;
-    --color-border: #e5e7eb; /* Gray 200 */
-    --color-input-bg: #ffffff;
-    --color-input-border: #d1d5db; /* Gray 300 */
+    --color-border: #f3d4c5;
+    --color-input-bg: #fffaf8;
+    --color-input-border: #f0c7b1;
 }
 
 [data-theme="dark"] {
-    /* Dark Theme Overrides */
-    --color-primary: #10b981; /* Secondary color for contrast */
-    --color-secondary: #4f46e5;
-    --color-text: #f3f4f6; /* Gray 100 */
-    --color-bg: #1e293b; /* Slate 800 */
-    --color-card-bg: #334155; /* Slate 700 */
-    --color-border: #475569; /* Slate 600 */
-    --color-input-bg: #475569;
-    --color-input-border: #64748b; /* Slate 500 */
+    /* Dark Theme - Charcoal & Ember */
+    --color-primary: #ff7849; /* glowing ember */
+    --color-secondary: #d8613b; /* deep orange-red */
+    --color-text: #f5f5f5;
+    --color-bg: #0b0b0b;
+    --color-card-bg: #1a1a1a;
+    --color-border: #333;
+    --color-input-bg: #242424;
+    --color-input-border: #3d3d3d;
 }
+
+
 
 /* --- BASE STYLES & TYPOGRAPHY --- */
 body {
@@ -33,7 +35,6 @@ body {
     transition: background-color 0.3s, color 0.3s;
     line-height: 1.6;
 }
-
 
 h1, h2, h3 {
     color: var(--color-primary);
@@ -91,12 +92,14 @@ a {
     font-weight: 500;
     color: var(--color-text);
     border-bottom: 3px solid transparent;
-    transition: color 0.2s, border-bottom 0.2s;
+    transition: color 0.3s, border-bottom 0.3s;
     cursor: pointer;
 }
 
 .nav-item:hover {
     color: var(--color-primary);
+    border-bottom: 3px solid var(--color-primary);
+    text-shadow: 0 0 6px rgba(139, 109, 53, 0.5);
 }
 
 .nav-item.active {
@@ -104,14 +107,16 @@ a {
     border-bottom: 3px solid var(--color-primary);
     font-weight: 600;
 }
+
 [data-theme="dark"] .nav-item:hover {
     color: var(--color-secondary);
+    text-shadow: 0 0 6px rgba(139, 109, 53, 0.5);
 }
+
 [data-theme="dark"] .nav-item.active {
     color: var(--color-secondary);
     border-bottom: 3px solid var(--color-secondary);
 }
-
 
 /* --- THEME TOGGLE BUTTON --- */
 .theme-toggle {
@@ -121,13 +126,15 @@ a {
     padding: 0.5rem;
     border-radius: 9999px;
     color: var(--color-text);
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s;
 }
 .theme-toggle:hover {
     background-color: var(--color-border);
+    box-shadow: 0 0 10px rgba(232, 90, 79, 0.4);
 }
 [data-theme="dark"] .theme-toggle:hover {
-    background-color: #475569;
+    background-color: #333333;
+    box-shadow: 0 0 10px rgba(255, 183, 77, 0.5);
 }
 
 .theme-icon {
@@ -171,27 +178,27 @@ a {
 
 .task-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 15px -3px rgba(232, 90, 79, 0.3);
 }
-
 
 .card-title {
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    color: var(--color-primary);
 }
 
 .card-meta p {
     font-size: 0.875rem;
-    color: #6b7280; /* Gray 500 */
+    color: #6b6b6b;
 }
 [data-theme="dark"] .card-meta p {
-    color: #9ca3af; /* Gray 400 */
+    color: #b0b0b0;
 }
 
 .card-meta span.tag {
     display: inline-block;
-    background-color: var(--color-primary);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 0.5rem;
@@ -207,51 +214,72 @@ a {
     margin-top: 1rem;
 }
 
+/* --- BUTTONS --- */
 .btn {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s, opacity 0.2s;
+    transition: background-color 0.3s, box-shadow 0.3s;
     border: 1px solid transparent;
 }
 
 .btn-primary {
-    background-color: var(--color-primary);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
     color: white;
 }
 .btn-primary:hover {
-    background-color: #3b30bd;
+    box-shadow: 0 0 12px rgba(232, 90, 79, 0.6);
+    opacity: 0.9;
 }
 [data-theme="dark"] .btn-primary {
-    background-color: var(--color-secondary);
+    background: linear-gradient(90deg, #f59e0b, #ffb74d);
 }
 [data-theme="dark"] .btn-primary:hover {
-    background-color: #0c8c63;
+    box-shadow: 0 0 14px rgba(255, 183, 77, 0.8);
+    opacity: 0.95;
 }
 
 .btn-delete {
-    background-color: #ef4444; /* Red 500 */
+    background-color: #dc2626;
     color: white;
 }
 .btn-delete:hover {
-    background-color: #dc2626; /* Red 600 */
+    background-color: #b91c1c;
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
 }
 
 .btn-edit {
-    background-color: #f3f4f6; /* Gray 100 */
+    background-color: #fef3e2;
     color: var(--color-text);
     border-color: var(--color-input-border);
 }
 .btn-edit:hover {
-    background-color: #e5e7eb; /* Gray 200 */
+    background-color: #fde2c3;
+    box-shadow: 0 0 6px rgba(255, 140, 66, 0.5);
 }
 [data-theme="dark"] .btn-edit {
-    background-color: #475569; /* Slate 600 */
+    background-color: #262626;
     color: var(--color-text);
 }
 [data-theme="dark"] .btn-edit:hover {
-    background-color: #334155; /* Slate 700 */
+    background-color: #333333;
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+}
+
+.btn-secondary {
+    background: linear-gradient(90deg, #ff8c42, #ffb74d);
+    color: white;
+}
+.btn-secondary:hover {
+    box-shadow: 0 0 10px rgba(255, 140, 66, 0.6);
+}
+[data-theme="dark"] .btn-secondary {
+    background: linear-gradient(90deg, #f59e0b, #ffb74d);
+    color: #0d0d0d;
+}
+[data-theme="dark"] .btn-secondary:hover {
+    box-shadow: 0 0 10px rgba(255, 183, 77, 0.7);
 }
 
 /* --- FORM STYLES --- */
@@ -283,31 +311,33 @@ a {
     border: 1px solid var(--color-input-border);
     background-color: var(--color-input-bg);
     color: var(--color-text);
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 .form-input:focus, .form-select:focus {
     outline: none;
     border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(232, 90, 79, 0.3);
 }
 [data-theme="dark"] .form-input:focus, [data-theme="dark"] .form-select:focus {
     border-color: var(--color-secondary);
+    box-shadow: 0 0 8px rgba(255, 183, 77, 0.4);
 }
 
 /* --- ALERT/MESSAGE BOX STYLES --- */
 .alert-box {
-    background-color: #fefcbf; /* Light yellow */
-    color: #856404;
+    background-color: #fff7e6;
+    color: #92400e;
     padding: 1rem;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     text-align: center;
 }
 [data-theme="dark"] .alert-box {
-    background-color: #494903;
-    color: #fffb8e;
+    background-color: #3b2f00;
+    color: #ffcc66;
 }
 
-/* --- CUSTOM MODAL STYLES (Replaces native alert/confirm) --- */
+/* --- CUSTOM MODAL STYLES --- */
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -315,7 +345,7 @@ a {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none; /* Hidden by default */
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 100;
@@ -350,8 +380,7 @@ a {
     gap: 1rem;
 }
 
-
-/* --- MEDIA QUERIES (Responsiveness) --- */
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
     .navbar-content {
         flex-wrap: wrap;
@@ -375,22 +404,7 @@ a {
     }
 }
 
-.btn-secondary {
-    background-color: #3b82f6; /* Blue 500 */
-    color: white;
-}
-.btn-secondary:hover {
-    background-color: #2563eb; /* Blue 600 */
-}
-[data-theme="dark"] .btn-secondary {
-    background-color: #60a5fa; /* Lighter blue for dark mode */
-    color: #1e293b;
-}
-[data-theme="dark"] .btn-secondary:hover {
-    background-color: #3b82f6;
-}
-
-
+/* --- TIME PICKER SECTION --- */
 .time-section {
   display: flex;
   flex-direction: column;
@@ -406,14 +420,12 @@ a {
 .time-select select {
   padding: 0.4rem;
   border-radius: 6px;
-  border: 1px solid var(--border-color, #ccc);
+  border: 1px solid var(--color-input-border);
   font-size: 0.9rem;
-  background-color: var(--input-bg, #fff);
+  background-color: var(--color-input-bg);
 }
 
 .time-select span {
   font-weight: bold;
-  color: var(--text-muted, #555);
+  color: var(--color-text);
 }
-
-

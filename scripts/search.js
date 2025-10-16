@@ -1,4 +1,3 @@
-// scripts/search.js
 export class SearchManager {
     constructor(state, ui) {
         this.state = state;

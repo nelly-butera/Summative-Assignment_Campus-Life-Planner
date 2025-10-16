@@ -1,4 +1,3 @@
-// scripts/storage.js
 export class StorageManager {
     constructor(key = 'pureJSTasks') {
         this.key = key;

@@ -1,4 +1,3 @@
-// scripts/validation.js
 export const ValidationRules = {
     // Basic validations
     title: /^\S(?:.*\S)?$/, // No leading/trailing spaces
@@ -6,7 +5,7 @@ export const ValidationRules = {
     date: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, // YYYY-MM-DD
     tag: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, // Letters, spaces, hyphens
     
-    // Advanced: duplicate word detection (lookahead)
+    // Advanced: duplicate word detection
     duplicateWords: /\b(\w+)\s+\1\b/,
     
     // Advanced: time format HH:MM
