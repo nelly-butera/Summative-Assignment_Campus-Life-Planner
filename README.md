@@ -2,6 +2,8 @@
 
 Hello Welcome To My Campus Life Planner app!!
 
+My project Video Link: https://youtu.be/mLI_aDgm7Bk
+
 
 ### 📋 Project Overview
 
