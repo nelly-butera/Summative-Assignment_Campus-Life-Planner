@@ -1,70 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Campus Life Planner</title>
-  <link rel="stylesheet" href="styles/base.css" />
-  <link rel="stylesheet" href="styles/layout.css" />
-  <link rel="stylesheet" href="styles/components.css" />
-  <link rel="stylesheet" href="styles/themes.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure JS Task Manager App</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
+<body id="app-body">
 
-<body>
-  <a href="#main" class="skip-link">Skip to main content</a>
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="navbar shadow-lg">
+        <div class="container navbar-content">
+            <!-- Title -->
+            <div class="flex-shrink-0">
+                <span class="nav-title">Task Planner</span>
+            </div>
 
-  <header class="app-header">
-    <h1 class="logo">🎓 Campus Life Planner</h1>
+            <!-- Main Navigation Links -->
+            <div class="nav-links">
+              <a href="#dashboard" id="nav-dashboard" class="nav-item active" data-target="dashboard">Dashboard</a>
+              <a href="#form" id="nav-form" class="nav-item" data-target="form">Add Task</a>
+              <a href="#about" id="nav-about" class="nav-item" data-target="about">About Me</a>
 
-    <button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            </div>
 
-    <nav id="navbar" class="navbar" aria-label="Main navigation">
-        <ul>
-            <li><a href="#about" class="nav-link active">About</a></li>
-            <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
-            <li><a href="#records" class="nav-link">Tasks</a></li>
-            <li><a href="#add-edit" class="nav-link">Add/Edit Task</a></li>
-            <li><a href="#settings" class="nav-link">Settings</a></li>
-        </ul>
-
-        <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+            <!-- Dark Mode Toggle Button -->
+            <div class="flex-shrink-0">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <!-- Sun Icon (Light Mode) -->
+                    <svg id="sun-icon" class="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <!-- Moon Icon (Dark Mode) -->
+                    <svg id="moon-icon" class="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </nav>
 
-  </header>
+    <!-- Main Content Area -->
+    <main class="container">
 
-  <main id="main">
-    <section id="about" class="page-section active">
-      <h2>About</h2>
-      <p>Welcome to Campus Life Planner — your all-in-one task and event manager for campus life!</p>
-      <p>Contact: <a href="mailto:you@example.com">you@example.com</a> | <a href="https://github.com/yourgithub" target="_blank">GitHub</a></p>
+        <!-- 1. Dashboard Section (Task List) -->
+        <section id="dashboard" class="page-section active">
+            <h2 class="text-3xl font-extrabold mb-6">Your Scheduled Tasks</h2>
+
+            <!-- File & Import/Export Toolbar -->
+
+
+            <!-- Search & Sorting Controls -->
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; gap: 0.5rem; flex-wrap: wrap;">
+                <button id="new-task-btn" class="btn btn-primary" style="white-space: nowrap;">+ New Task</button>
+
+                <!-- Regex Search Input -->
+                <input type="text" id="task-search" placeholder="Regex search (e.g., Study|Work)" style="flex: 1; min-width: 200px; padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #ccc;">
+
+                <!-- Sorting Dropdown -->
+                <select id="task-sort" style="padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #ccc;">
+                    <option value="">Sort by...</option>
+                    <option value="title-asc">Title A → Z</option>
+                    <option value="title-desc">Title Z → A</option>
+                    <option value="dueDate-asc">Date ↑</option>
+                    <option value="dueDate-desc">Date ↓</option>
+                    <option value="duration-asc">Duration ↑</option>
+                    <option value="duration-desc">Duration ↓</option>
+                </select>
+                <button id="export-json-btn" class="btn btn-primary">Export JSON</button>
+                <button id="export-csv-btn" class="btn btn-edit">Export CSV</button>
+                <button id="import-json-btn" class="btn btn-secondary">Import JSON</button>
+                <input type="file" id="import-json-input" accept=".json" style="display:none;">
+            <!-- </div> -->
+            </div>
+
+            <!-- Task List Grid -->
+            <div id="task-list" class="dashboard-grid">
+                <!-- Task Cards will be rendered here by JavaScript -->
+            </div>
+
+        </section>
+
+
+        <!-- 2. Add/Edit Form Section -->
+        <section id="form" class="page-section">
+            <div class="form-container">
+                <h2 id="form-title" class="text-3xl font-extrabold mb-6">Add New Task</h2>
+                <div id="form-message" class="alert-box" style="display: none;"></div>
+
+                <form id="task-form">
+                    <input type="hidden" id="task-id" value="">
+                    
+                    <div class="form-group">
+                        <label for="title" class="form-label">Task Title</label>
+                        <input type="text" id="title" name="title" required placeholder="e.g., Group Study Session" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dueDate" class="form-label">Due Date</label>
+                        <input type="date" id="dueDate" name="dueDate" required class="form-input">
+                    </div>
+                    
+
+                    <!-- Start Time -->
+                    <div class="form-group time-section">
+                    <label>Start Time:</label>
+                    <div class="time-select">
+                        <select id="startHour">
+                        <option value="">HH</option>
+                        </select>
+                        <span>:</span>
+                        <select id="startMinute">
+                        <option value="">MM</option>
+                        </select>
+                    </div>
+                    </div>
+
+                    <!-- End Time -->
+                    <div class="form-group time-section">
+                    <label>End Time:</label>
+                    <div class="time-select">
+                        <select id="endHour">
+                        <option value="">HH</option>
+                        </select>
+                        <span>:</span>
+                        <select id="endMinute">
+                        <option value="">MM</option>
+                        </select>
+                    </div>
+                    </div>
+
+                    <!-- Auto Duration -->
+                    <div class="form-group">
+                    <label>Duration (minutes):</label>
+                    <input type="number" id="duration" readonly>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="tag" class="form-label">Tag/Category</label>
+                        <select id="tag" name="tag" class="form-select" required>
+                            <option value="Study">Study</option>
+                            <option value="Work">Work</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Health">Health</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+                      <button type="button" id="form-reset-btn" class="btn btn-edit">
+                          Cancel / Clear
+                      </button>
+
+                      <button type="submit" id="form-submit-btn" class="btn btn-primary">
+                          Add Task
+                      </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    <!-- 3. About App Section -->
+    <section id="about" class="page-section">
+    <div class="form-container" style="max-width: 800px; ">
+        <h2 class="text-3xl font-extrabold mb-4" style="text-align: center;">About Me and My Application</h2>
+        <p style="font-size: 1.125rem; margin: 1em; margin-bottom: 1.5rem;">
+        Hi, I’m Nelly — I built this app as a simple, responsive task planner made with pure HTML, CSS, and JavaScript. 
+        It’s designed to help students and young professionals stay organized while keeping things light, fast, and distraction-free.
+        </p> 
+        <p style="font-size: 1.125rem; margin: 1em; margin-bottom: 1.5rem;"><strong>→ No Frameworks:</strong> Everything is built from scratch with vanilla code.</p>
+        <p style="font-size: 1.125rem; margin: 1em; margin-bottom: 1.5rem;"><strong>→ Theme Toggle:</strong> Switch easily between Light and Dark modes.</p>
+        <p style="font-size: 1.125rem; margin: 1em; margin-bottom: 1.5rem;"><strong>→ Smart Storage:</strong> All your data stays safely in your browser through localstorage.</p>
+        <p style="font-size: 1.125rem; margin: 1em; margin-bottom: 1.5rem;"><strong>→ Full Control:</strong> Add, edit, search, and manage your tasks easily in one place.</p>
+
+    </div>
     </section>
 
-    <section id="dashboard" class="page-section">
-      <h2>Dashboard</h2>
-      <p>Quick stats and summaries will appear here.</p>
-    </section>
 
-    <section id="records" class="page-section">
-      <h2>Tasks & Events</h2>
-      <p>Manage your to-dos, events, and deadlines here.</p>
-    </section>
+    </main>
 
-    <section id="add-edit" class="page-section">
-      <h2>Add / Edit Task</h2>
-      <p>This will contain the task form later (title, duration, tag, date).</p>
-      <button class="btn-primary">+ Add New Task</button>
-    </section>
+    <!-- Modal Container for Confirmation (Replaces native confirm()) -->
+    <div id="custom-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+            <div class="modal-actions">
+                <button id="modal-cancel-btn" class="btn btn-edit">Cancel</button>
+                <button id="modal-confirm-btn" class="btn btn-delete">Delete</button>
+            </div>
+        </div>
+    </div>
 
-    <section id="settings" class="page-section">
-      <h2>Settings</h2>
-      <p>Change display units, theme preferences, and other options.</p>
-    </section>
-  </main>
+    <!-- Link to the external JavaScript file -->
+    <!-- ============================= -->
+<!--   JAVASCRIPT MODULE IMPORTS   -->
+<!-- ============================= -->
+    <script type="module">
+        import { TaskPlannerApp } from './scripts/app.js';
 
-  <footer>
-    <p>&copy; 2025 Campus Life Planner</p>
-  </footer>
+        // Initialize the app after DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Initializing TaskPlannerApp...");
+            new TaskPlannerApp();
+        });
+    </script>
 
-  <script src="scripts/main.js"></script>
+
 </body>
+<!-- Footer -->
+<footer id="app-footer" style="background-color: var(--bg-secondary, #f3f4f6); padding: 1rem 0; text-align: center; border-top: 1px solid #e5e7eb; margin-top: 2rem;">
+    <p style="margin: 0; font-size: 0.875rem; color: #6b7280;">
+         &copy; 2025 Butera Campus Task Planner. All rights reserved.
+    </p>
+</footer>
+
 </html>
