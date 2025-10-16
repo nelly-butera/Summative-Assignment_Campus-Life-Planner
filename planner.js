@@ -262,6 +262,12 @@ function handleFormSubmit(e) {
     const paddedEndMinute = endMinute.toString().padStart(2, '0');
     const endTime = `${paddedEndHour}:${paddedEndMinute}`;
 
+    const validationError = validateFormFields();
+    if (validationError) {
+        showMessage(validationError, 'error');
+        return;
+    }
+
     if (id) {
         // UPDATE existing task
         const taskIndex = tasks.findIndex(t => t.id === id);
@@ -301,6 +307,35 @@ function handleFormSubmit(e) {
     renderTasks();
     clearForm();
     showPage('dashboard');
+}
+
+
+/**
+ * Auto-fill missing duration and start/end times for tasks.
+ * @param {Array} taskArray - Array of task objects
+ */
+function fillMissingDurations(taskArray) {
+    taskArray.forEach(task => {
+        // If startTime or endTime is missing, assign default 1-hour slot
+        if (!task.startTime || !task.endTime) {
+            task.startTime = '09:00';
+            task.endTime = '10:00';
+            task.duration = 60;
+        } else if (!task.duration || task.duration <= 0) {
+            // Otherwise, calculate duration normally
+            const [startHour, startMinute] = task.startTime.split(':').map(Number);
+            const [endHour, endMinute] = task.endTime.split(':').map(Number);
+
+            let startTotal = startHour * 60 + startMinute;
+            let endTotal = endHour * 60 + endMinute;
+            let duration = endTotal - startTotal;
+
+            // Handle tasks that cross midnight
+            if (duration < 0) duration += 24 * 60;
+
+            task.duration = duration;
+        }
+    });
 }
 
 
@@ -602,6 +637,8 @@ function importTasksJSON(file) {
                 return;
             }
 
+            fillMissingDurations(validTasks);
+
             // Merge with existing tasks and avoid duplicates by ID
             const existingIds = new Set(tasks.map(t => t.id));
             validTasks.forEach(t => {
@@ -670,3 +707,101 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+function validateFormFields() {
+    const title = document.getElementById('title').value.trim();
+    const dueDate = document.getElementById('dueDate').value.trim();
+    const duration = document.getElementById('duration').value.trim();
+    const tag = document.getElementById('tag').value.trim();
+
+    const titleRegex = /^\S(?:.*\S)?$/; // no leading/trailing spaces
+    const numericRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/; // duration
+    const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+    const tagRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+    const advancedRegex = /\b(\w+)\s+\1\b/; // catch duplicate words in title
+
+    if (!titleRegex.test(title)) return "Title cannot have leading/trailing spaces or empty.";
+    if (advancedRegex.test(title)) return "Title contains duplicated words.";
+    if (!numericRegex.test(duration)) return "Duration must be a positive number (max 2 decimals).";
+    if (!dateRegex.test(dueDate)) return "Date must be in YYYY-MM-DD format.";
+    if (!tagRegex.test(tag)) return "Tag can only contain letters, spaces, or hyphens.";
+
+    return null; // all good
+}
+
+
+function sortTasks(field, ascending = true) {
+    tasks.sort((a, b) => {
+        let valA = a[field];
+        let valB = b[field];
+
+        // parse numbers for duration
+        if (field === 'duration') {
+            valA = Number(valA);
+            valB = Number(valB);
+        }
+
+        // parse dates
+        if (field === 'dueDate') {
+            valA = new Date(valA);
+            valB = new Date(valB);
+        }
+
+        if (valA < valB) return ascending ? -1 : 1;
+        if (valA > valB) return ascending ? 1 : -1;
+        return 0;
+    });
+
+    renderTasks();
+}
+
+document.getElementById('task-sort').addEventListener('change', (e) => {
+    const value = e.target.value;
+    if (!value) return;
+    const [field, order] = value.split('-');
+    sortTasks(field, order === 'asc');
+});
+
+
+
+function searchTasks() {
+    const pattern = document.getElementById('task-search').value;
+    let regex;
+    try {
+        regex = new RegExp(pattern, 'i'); // case-insensitive
+    } catch (e) {
+        console.warn("Invalid regex", e);
+        return; // skip invalid patterns
+    }
+
+    const taskList = document.getElementById('task-list');
+    taskList.innerHTML = '';
+
+    tasks.forEach(task => {
+        const taskHTML = `
+            <h3 class="task-title">${task.title}</h3>
+            <p><strong>📅 Due:</strong> ${task.dueDate.split('T')[0]}</p>
+            <p><strong>🕒 Duration:</strong> ${task.duration} mins</p>
+            <p><strong>🏷️ Tag:</strong> ${task.tag}</p>
+            <div class="card-actions">
+                <button class="btn btn-edit" onclick="editTask('${task.id}')">Edit</button>
+                <button class="btn btn-delete" onclick="showDeleteConfirmation('${task.id}')">Delete</button>
+            </div>
+        `;
+
+        const card = document.createElement('div');
+        card.className = 'task-card shadow-md';
+        card.dataset.id = task.id;
+        card.innerHTML = taskHTML;
+
+        // Highlight matches in task title
+        if (regex.test(task.title)) {
+            card.querySelector('.task-title').innerHTML = task.title.replace(regex, match => `<mark>${match}</mark>`);
+            taskList.appendChild(card);
+        }
+    });
+}
+
+// Attach search listener
+document.getElementById('task-search').addEventListener('input', searchTasks);
