@@ -4,6 +4,7 @@ Hello Welcome To My Campus Life Planner app!!
 
 My project Video Link: https://youtu.be/mLI_aDgm7Bk
 
+My Github Pages Deployment: https://nelly-butera.github.io/Summative-Assignment_Campus-Life-Planner/
 
 ### 📋 Project Overview
 
