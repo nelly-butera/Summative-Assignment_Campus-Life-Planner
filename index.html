@@ -4,33 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Life Planner</title>
+    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body id="app-body">
 
-    <!-- nav bar -->
+    <!-- Navigation Bar -->
     <nav id="navbar" class="navbar shadow-lg">
         <div class="container navbar-content">
+            <!-- Title -->
             <div class="flex-shrink-0">
                 <span class="nav-title">C. Life Planner</span>
             </div>
 
             <!-- Main Navigation Links -->
             <div class="nav-links">
-              <a href="#dashboard" id="nav-dashboard" class="nav-item active" data-target="dashboard">Dashboard</a>
-              <a href="#form" id="nav-form" class="nav-item" data-target="form">Add Task</a>
-              <a href="#about" id="nav-about" class="nav-item" data-target="about">About Me</a>
-
+                <a href="#dashboard" onclick="showPage('dashboard')" id="nav-dashboard"
+                   class="nav-item active">
+                    Dashboard
+                </a>
+                <a href="#form" onclick="showPage('form')" id="nav-form"
+                   class="nav-item">
+                    Add Task
+                </a>
+                <a href="#about" onclick="showPage('about')" id="nav-about"
+                   class="nav-item">
+                    About Me
+                </a>
             </div>
 
             <!-- Dark Mode Toggle Button -->
             <div class="flex-shrink-0">
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
-                    <!-- Light Mode -->
+                <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <!-- Sun Icon (Light Mode) -->
                     <svg id="sun-icon" class="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    <!-- Dark Mode -->
+                    <!-- Moon Icon (Dark Mode) -->
                     <svg id="moon-icon" class="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
@@ -39,14 +49,17 @@
         </div>
     </nav>
 
+    <!-- Main Content Area -->
     <main class="container">
 
-        <!-- task list-->
+        <!-- 1. Dashboard Section (Task List) -->
         <section id="dashboard" class="page-section active">
             <h2 class="text-3xl font-extrabold mb-6">Your Scheduled Tasks</h2>
 
+            <!-- File & Import/Export Toolbar -->
 
-            <!-- Search & Sorting section -->
+
+            <!-- Search & Sorting Controls -->
             <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; gap: 0.5rem; flex-wrap: wrap;">
                 <button id="new-task-btn" class="btn btn-primary" style="white-space: nowrap;">+ New Task</button>
 
@@ -72,13 +85,13 @@
 
             <!-- Task List Grid -->
             <div id="task-list" class="dashboard-grid">
-                <!-- Task Cards will be loaded here by my app.js -->
+                <!-- Task Cards will be rendered here by JavaScript -->
             </div>
 
         </section>
 
 
-        <!-- edit/add form-->
+        <!-- 2. Add/Edit Form Section -->
         <section id="form" class="page-section">
             <div class="form-container">
                 <h2 id="form-title" class="text-3xl font-extrabold mb-6">Add New Task</h2>
@@ -145,19 +158,18 @@
                     </div>
 
                     <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
-                      <button type="button" id="form-reset-btn" class="btn btn-edit">
-                          Cancel / Clear
-                      </button>
-
-                      <button type="submit" id="form-submit-btn" class="btn btn-primary">
-                          Add Task
-                      </button>
+                        <button type="button" id="form-reset-btn" class="btn btn-edit">
+                            Cancel
+                        </button>
+                        <button type="submit" id="form-submit-btn" class="btn btn-primary">
+                            Add Task
+                        </button>
                     </div>
                 </form>
             </div>
         </section>
 
-    <!-- about me section -->
+    <!-- 3. About App Section -->
     <section id="about" class="page-section">
     <div class="form-container" style="max-width: 800px; ">
         <h2 class="text-3xl font-extrabold mb-4" style="text-align: center;">About Me and My Application</h2>
@@ -173,7 +185,7 @@
 
     </main>
 
-    <!-- Modal Container for Confirmation -->
+    <!-- Modal Container for Confirmation (Replaces native confirm()) -->
     <div id="custom-modal" class="modal-backdrop">
         <div class="modal-content">
             <p id="modal-message"></p>
@@ -184,24 +196,16 @@
         </div>
     </div>
 
-    <!-- loading my app.js -->
-    <script type="module">
-        import { TaskPlannerApp } from './scripts/app.js';
-
-        // I initiate the app after DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log("Initializing TaskPlannerApp...");
-            new TaskPlannerApp();
-        });
-    </script>
+    <!-- Link to the external JavaScript file -->
+    <script src="./scripts/app.js"></script>
 
 
 </body>
 <!-- Footer -->
-<footer id="app-footer" style="background-color: var(--bg-secondary, #f3f4f6); padding: 1rem 0; text-align: center; border-top: 1px solid #e5e7eb; margin-top: 2rem;">
+
+<footer id="footer" style="background-color: var(--bg-secondary, #f3f4f6); padding: 1rem 0; text-align: center; border-top: 1px solid #e5e7eb; margin-top: 2rem;">
     <p style="margin: 0; font-size: 0.875rem; color: #6b7280;">
          &copy; 2025 Butera Campus Task Planner. All rights reserved.
     </p>
 </footer>
-
 </html>
